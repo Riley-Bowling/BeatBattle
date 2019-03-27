@@ -8,26 +8,30 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class MyGdxGame extends ApplicationAdapter {
 	SpriteBatch batch;
-	Texture img;
+	Texture beat_img;
+	Texture track_img;
 	
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		img = new Texture("badlogic.jpg");
+		beat_img = new Texture("beat.png");
+		track_img = new Texture("track.png");
 	}
 
 	@Override
 	public void render () {
-		Gdx.gl.glClearColor(1, 0, 0, 1);
+		Gdx.gl.glClearColor(0.57f, 0.77f, 0.85f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
-		batch.draw(img, 0, 0);
+		batch.draw(track_img, 50, 50,500,150);
+		batch.draw(beat_img, 80, 80,80,80);
 		batch.end();
 	}
 	
 	@Override
 	public void dispose () {
 		batch.dispose();
-		img.dispose();
+		beat_img.dispose();
+		track_img.dispose();
 	}
 }
