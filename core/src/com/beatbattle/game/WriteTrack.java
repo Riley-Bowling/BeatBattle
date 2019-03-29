@@ -2,6 +2,7 @@ package com.beatbattle.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -12,6 +13,9 @@ import java.util.LinkedList;
 public class WriteTrack extends Track {
 
     private float shift = 0;
+    private Sound kick = Gdx.audio.newSound(Gdx.files.internal("DrumKit/kick.wav"));
+    private Sound snare = Gdx.audio.newSound(Gdx.files.internal("DrumKit/snare.wav"));
+    private Sound hihat = Gdx.audio.newSound(Gdx.files.internal("DrumKit/hihat.wav"));
 
     public WriteTrack(int x){
         super(x);
@@ -32,16 +36,19 @@ public class WriteTrack extends Track {
             if (shift > sSprite.getHeight()) {
                 loopSection();
                 shift = 0;
-            }
 
-            if(Gdx.input.isKeyPressed(Input.Keys.A)) {
-                super.getSects().get(0).setPatt(1, 0, 0);
-            }
-            if(Gdx.input.isKeyPressed(Input.Keys.S)) {
-                super.getSects().get(0).setPatt(0, 1, 0);
-            }
-            if(Gdx.input.isKeyPressed(Input.Keys.D)) {
-                super.getSects().get(0).setPatt(0, 0, 1);
+                if (Gdx.input.isKeyPressed(Input.Keys.A)) {
+                    super.getSects().get(0).setPatt(1, 0, 0);
+                    kick.play();
+                }
+                if (Gdx.input.isKeyPressed(Input.Keys.S)) {
+                    super.getSects().get(0).setPatt(0, 1, 0);
+                    snare.play();
+                }
+                if (Gdx.input.isKeyPressed(Input.Keys.D)) {
+                    super.getSects().get(0).setPatt(0, 0, 1);
+                    hihat.play();
+                }
             }
         }
     }
