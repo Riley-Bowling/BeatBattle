@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.beatbattle.game.BeatBattle;
@@ -16,29 +17,34 @@ public class Stage2 implements Screen {
     OrthographicCamera camera;
     ExtendViewport viewport;
     WriteTrack track;
+    BasicBeat beat;
 
     public Stage2(final BeatBattle game) {
         this.game = game;
 
         camera = new OrthographicCamera();
         viewport = new ExtendViewport(800, 600, camera);
+        viewport.apply();
         track = new WriteTrack((int) viewport.getMinWorldWidth()/2);
+        beat = new BasicBeat(50,50);
     }
 
     @Override
     public void render(float delta) {
+        //update game
+        delta = Math.max(1/30f, delta);
+
+        //draw
+        camera.update();
         Gdx.gl.glClearColor(0.57f, 0.77f, 0.85f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-
+        game.batch.setProjectionMatrix(camera.combined);
         game.batch.begin();
 
-        track.create(game.batch);
-        track.run(game.batch, 100);
+        track.run(game.batch, 100, delta);
 
         if(Gdx.input.isKeyPressed(Input.Keys.A)) {
-            BasicBeat beat = new BasicBeat(50,50);
-            beat.getSprite().draw(game.batch);
+
         }
 
         if(Gdx.input.isKeyPressed(Input.Keys.S)) {

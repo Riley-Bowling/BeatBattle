@@ -23,7 +23,6 @@ public abstract class Track {
         return sections;
     }
 
-    public abstract void create(SpriteBatch batch);
-    public abstract void run(SpriteBatch batch, int bpm);
+    public abstract void run(SpriteBatch batch, int bpm, float delta);
 
 }
