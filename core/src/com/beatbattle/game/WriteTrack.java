@@ -3,11 +3,9 @@ package com.beatbattle.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class WriteTrack extends Track {
@@ -47,6 +45,21 @@ public class WriteTrack extends Track {
                 }
                 if (Gdx.input.isKeyPressed(Input.Keys.D)) {
                     super.getSects().get(0).setPatt(0, 0, 1);
+                    hihat.play();
+                }
+                if (Gdx.input.isKeyPressed(Input.Keys.D) && Gdx.input.isKeyPressed(Input.Keys.A)) {
+                    super.getSects().get(0).setPatt(1, 0, 1);
+                    kick.play();
+                    hihat.play();
+                }
+                if (Gdx.input.isKeyPressed(Input.Keys.A) && Gdx.input.isKeyPressed(Input.Keys.S)) {
+                    super.getSects().get(0).setPatt(1, 1, 0);
+                    kick.play();
+                    snare.play();
+                }
+                if (Gdx.input.isKeyPressed(Input.Keys.S) && Gdx.input.isKeyPressed(Input.Keys.D)) {
+                    super.getSects().get(0).setPatt(0, 1, 1);
+                    snare.play();
                     hihat.play();
                 }
             }
