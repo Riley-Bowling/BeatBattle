@@ -43,18 +43,6 @@ public class Stage2 implements Screen {
 
         track.run(game.batch, 100, delta);
 
-        if(Gdx.input.isKeyPressed(Input.Keys.A)) {
-
-        }
-
-        if(Gdx.input.isKeyPressed(Input.Keys.S)) {
-
-        }
-
-        if(Gdx.input.isKeyPressed(Input.Keys.D)) {
-
-        }
-
         game.batch.end();
 
     }
