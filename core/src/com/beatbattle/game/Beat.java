@@ -1,9 +1,10 @@
 package com.beatbattle.game;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 
 public abstract class Beat {
-    private Texture tex;
+    private Sprite sprite;
     private int xpos;
     private int ypos;
 
@@ -18,6 +19,16 @@ public abstract class Beat {
 
     public int getYpos() {
         return ypos;
+    }
+
+    public void setSprite(Texture tex) {
+        sprite = new Sprite(tex);
+        sprite.setX(xpos);
+        sprite.setY(ypos);
+    }
+
+    public Sprite getSprite() {
+        return sprite;
     }
 
 

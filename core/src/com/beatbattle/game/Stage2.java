@@ -15,13 +15,14 @@ public class Stage2 implements Screen {
 
     OrthographicCamera camera;
     ExtendViewport viewport;
-    Sprite beatsprite;
+    WriteTrack track;
 
     public Stage2(final BeatBattle game) {
         this.game = game;
 
         camera = new OrthographicCamera();
         viewport = new ExtendViewport(800, 600, camera);
+        track = new WriteTrack((int) viewport.getMinWorldWidth()/2);
     }
 
     @Override
@@ -29,12 +30,23 @@ public class Stage2 implements Screen {
         Gdx.gl.glClearColor(0.57f, 0.77f, 0.85f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+
         game.batch.begin();
+
+        track.create(game.batch);
+        track.run(game.batch, 100);
 
         if(Gdx.input.isKeyPressed(Input.Keys.A)) {
             BasicBeat beat = new BasicBeat(50,50);
-            beatsprite = new Sprite(beat.getTex());
-            beatsprite.draw(game.batch);
+            beat.getSprite().draw(game.batch);
+        }
+
+        if(Gdx.input.isKeyPressed(Input.Keys.S)) {
+
+        }
+
+        if(Gdx.input.isKeyPressed(Input.Keys.D)) {
+
         }
 
         game.batch.end();
