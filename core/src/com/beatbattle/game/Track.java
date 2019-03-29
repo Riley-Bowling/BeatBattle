@@ -5,21 +5,22 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public abstract class Track {
-    private ArrayList<TrackSection> sections;
+    private LinkedList<TrackSection> sections;
     private int xpos;
 
     public Track(int x){
         this.xpos = x;
-        sections = new ArrayList<TrackSection>();
+        sections = new LinkedList<TrackSection>();
     }
 
     public int getXpos() {
         return xpos;
     }
 
-    public ArrayList<TrackSection> getSects() {
+    public LinkedList<TrackSection> getSects() {
         return sections;
     }
 
