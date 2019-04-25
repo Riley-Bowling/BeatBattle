@@ -33,11 +33,11 @@ public class WriteTrack extends Track {
 
     public WriteTrack(int x, int BPM){
         super(x, BPM);
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 16; i++) {
             super.getSects().add(new TrackSection(0, 0, 0));
             Sprite sSprite = super.getSects().get(i).getSprite();
             sSprite.setSize(300,60);
-            sSprite.setPosition(super.getXpos() - sSprite.getWidth()/2, i * sSprite.getHeight());
+            sSprite.setPosition(super.getXpos() - sSprite.getWidth()/2, i * sSprite.getHeight() - 60);
         }
     }
 
@@ -51,7 +51,7 @@ public class WriteTrack extends Track {
 
         if (Gdx.input.isKeyPressed(Input.Keys.A)) {
             if (apres == false && arele == true && beatlayed == false) {
-                super.getSects().get(0).setPatt(1, 0, 0);
+                super.getSects().get(1).setPatt(1, 0, 0);
                 beatlayed = true;
                 kick.play();
                 apres = true;
@@ -64,7 +64,7 @@ public class WriteTrack extends Track {
 
         if (Gdx.input.isKeyPressed(Input.Keys.S)) {
             if (spres == false && srele == true && beatlayed == false) {
-                super.getSects().get(0).setPatt(0, 1, 0);
+                super.getSects().get(1).setPatt(0, 1, 0);
                 beatlayed = true;
                 snare.play();
                 spres = true;
@@ -77,7 +77,7 @@ public class WriteTrack extends Track {
 
         if (Gdx.input.isKeyPressed(Input.Keys.D)) {
             if (dpres == false && drele == true && beatlayed == false) {
-                super.getSects().get(0).setPatt(0, 0, 1);
+                super.getSects().get(1).setPatt(0, 0, 1);
                 beatlayed = true;
                 hihat.play();
                 dpres = true;
@@ -133,7 +133,7 @@ public class WriteTrack extends Track {
         //loop graphics
         for (int i = super.getSects().size() - 1; i >= 0; i--) {
             Sprite sSprite = super.getSects().get(i).getSprite();
-            sSprite.setPosition(super.getXpos() - sSprite.getWidth() / 2, i * sSprite.getHeight());
+            sSprite.setPosition(super.getXpos() - sSprite.getWidth() / 2, i * sSprite.getHeight() - 60);
         }
     }
 
