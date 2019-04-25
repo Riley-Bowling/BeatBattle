@@ -25,7 +25,7 @@ public class Stage2 implements Screen {
         camera = new OrthographicCamera();
         viewport = new ExtendViewport(800, 600, camera);
         viewport.apply();
-        track = new WriteTrack((int) viewport.getMinWorldWidth()/2);
+        track = new WriteTrack((int) viewport.getMinWorldWidth()/2, 100);
         beat = new BasicBeat(50,50);
     }
 
