@@ -10,20 +10,14 @@ import java.util.LinkedList;
 public abstract class Track {
     private LinkedList<TrackSection> sections;
     private int xpos;
-    private int BPM;
 
-    public Track(int x, int s){
+    public Track(int x){
         this.xpos = x;
-        this.BPM = s;
         sections = new LinkedList<TrackSection>();
     }
 
     public int getXpos() {
         return xpos;
-    }
-    public float getSpeed() {
-        //BPM -> speed math
-        return (float) BPM - 20;
     }
 
     public LinkedList<TrackSection> getSects() {
