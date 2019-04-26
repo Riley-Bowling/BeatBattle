@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 
 public class TrackSection {
     int[] bPatt;
-    private Sprite sprite;
     private Texture tex;
 
     public TrackSection(int a, int b, int c) {
@@ -14,7 +13,6 @@ public class TrackSection {
         bPatt[1] = b;
         bPatt[2] = c;
         setTex(bPatt);
-        sprite = new Sprite(tex);
     }
 
     private void setTex(int[] b){
@@ -39,10 +37,9 @@ public class TrackSection {
         bPatt[1] = b;
         bPatt[2] = c;
         setTex(bPatt);
-        sprite.setTexture(tex);
     }
 
-    public Sprite getSprite() {
-        return sprite;
+    public Texture getTex() {
+        return tex;
     }
 }

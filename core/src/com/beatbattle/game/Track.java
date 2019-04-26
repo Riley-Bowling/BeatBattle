@@ -10,17 +10,20 @@ import java.util.LinkedList;
 
 public abstract class Track {
     private LinkedList<TrackSection> sections;
+    private LinkedList<Sprite> sectionSprites;
     private int xpos;
     private int BPM;
     private Player player;
     private int controlScheme;
     private int counter;
 
-    public Track(int x, int s, int c){
-        this.xpos = x;
-        this.BPM = s;
-        this.controlScheme = c;
-        sections = new LinkedList<TrackSection>();
+    public Track(int x, int s, LinkedList<TrackSection> t, int c){
+        xpos = x;
+        BPM = s;
+        controlScheme = c;
+
+        sections = t;
+        sectionSprites = new LinkedList<Sprite>();
         player = new Player();
     }
 
@@ -50,9 +53,15 @@ public abstract class Track {
     public int getControlScheme() {
         return controlScheme;
     }
+
     public LinkedList<TrackSection> getSects() {
         return sections;
     }
+
+    public LinkedList<Sprite> getSectSprites() {
+        return sectionSprites;
+    }
+
     public Player getPlayer() {
         return player;
     }

@@ -27,13 +27,18 @@ public class WriteTrack extends Track {
     private Sound hihat = Gdx.audio.newSound(Gdx.files.internal("DrumKit/hihat.wav"));
     private Sound tick = Gdx.audio.newSound(Gdx.files.internal("DrumKit/tick.wav"));
 
-    public WriteTrack(int x, int BPM, int c){
-        super(x, BPM, c);
+    public WriteTrack(int x, int BPM, LinkedList<TrackSection> t, int c){
+        super(x, BPM, t, c);
         //beats per loop = 12
         super.setCounter(12);
         for (int i = 0; i < 12; i++) {
-            super.getSects().add(new TrackSection(0, 0, 0));
-            Sprite sSprite = super.getSects().get(i).getSprite();
+            if (super.getControlScheme() == 1) {
+                super.getSects().add(new TrackSection(0, 0, 0));
+            }
+
+            Sprite sSprite = new Sprite(super.getSects().get(i).getTex());
+            super.getSectSprites().add(sSprite);
+
             sSprite.setSize(300,60);
             sSprite.setPosition(super.getXpos() - sSprite.getWidth()/2, i * sSprite.getHeight() - 60);
         }
@@ -42,7 +47,8 @@ public class WriteTrack extends Track {
     public void run(SpriteBatch batch, int bpm, float delta) {
         shift += (super.getSpeed() * delta);
         for (int i = super.getSects().size() - 1; i >= 0; i--) {
-            Sprite sSprite = super.getSects().get(i).getSprite();
+            Sprite sSprite = super.getSectSprites().get(i);
+            sSprite.setTexture(super.getSects().get(i).getTex());
             sSprite.translateY(super.getSpeed() * delta);
             sSprite.draw(batch);
         }
@@ -53,12 +59,12 @@ public class WriteTrack extends Track {
         }
 
         //metronome
-        if (shift > super.getSects().get(0).getSprite().getHeight()/2 && ticked == false) {
+        if (shift > super.getSectSprites().get(0).getHeight()/2 && ticked == false) {
             tick.play(0.2f);
             ticked = true;
         }
 
-        if (shift > super.getSects().get(0).getSprite().getHeight()) {
+        if (shift > super.getSectSprites().get(0).getHeight()) {
             loopSection();
             shift = 0;
             apres = false;
@@ -73,18 +79,21 @@ public class WriteTrack extends Track {
     }
 
     private void loopSection() {
-        //loop list
-        LinkedList<TrackSection> sects = super.getSects();
-        sects.addFirst(sects.get(sects.size() - 1));
-        sects.removeLast();
+        //loop BeatPattern
 
-        //loop graphics
+        if (super.getControlScheme() == 2) {
+
+            LinkedList<TrackSection> temp = super.getSects();
+            temp.addFirst(temp.get(temp.size() - 1));
+            temp.removeLast();
+        }
+
         for (int i = super.getSects().size() - 1; i >= 0; i--) {
-            Sprite sSprite = super.getSects().get(i).getSprite();
+            Sprite sSprite = super.getSectSprites().get(i);
             sSprite.setPosition(super.getXpos() - sSprite.getWidth() / 2, i * sSprite.getHeight() - 60);
         }
         if (super.getCounter() == 1) {
-            super.setCounter(12);
+            super.setCounter(super.getSects().size());
         }
         else {
             super.subtractCounter();

@@ -117,7 +117,7 @@ public class Menu implements Screen{
             public boolean touchDown(InputEvent event, float x, float y,int pointer, int button) {
                 //Currently,when click on the button , the screen switch to the game interface
 
-                game.setScreen(new Stage2(game));
+                game.setScreen(new TwoPVersus(game));
                 System.out.println("Game started now !");
                 return true;
             }

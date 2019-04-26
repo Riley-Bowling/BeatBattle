@@ -21,9 +21,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.graphics.Color;
+import java.util.ArrayList;
+import java.util.LinkedList;
 
-
-public class Stage2 implements Screen {
+public class TwoPVersus implements Screen {
 
     final BeatBattle game;
 
@@ -37,14 +38,20 @@ public class Stage2 implements Screen {
     Texture background;
     LabelStyle trackerStyle;
 
-    public Stage2(final BeatBattle game) {
+    LinkedList<TrackSection> pattern;
+
+    public TwoPVersus(final BeatBattle game) {
         this.game = game;
 
         camera = new OrthographicCamera();
         viewport = new ExtendViewport(800, 600, camera);
         viewport.apply();
-        track1 = new WriteTrack((int) viewport.getMinWorldWidth()/4, 100, 1);
-        track2 = new WriteTrack((int) (viewport.getMinWorldWidth() - viewport.getMinWorldWidth()/4), 100, 2);
+
+        pattern = new LinkedList<TrackSection>();
+
+        //length of track before looping
+        track1 = new WriteTrack((int) viewport.getMinWorldWidth()/4, 80, pattern, 1);
+        track2 = new WriteTrack((int) (viewport.getMinWorldWidth() - viewport.getMinWorldWidth()/4), 80, pattern, 2);
         background = new Texture(Gdx.files.internal("bg.jpg"));
 
         border = new Sprite(new Texture(Gdx.files.internal("border.png")));
@@ -56,6 +63,7 @@ public class Stage2 implements Screen {
         border2.setSize(330,110);
         border2.setPosition(track2.getXpos() - 150 - 15, 60);
         game.font.getData().setScale(2,2);;
+
     }
 
     @Override
