@@ -17,7 +17,7 @@ public class BeatBattle extends Game {
 	public void create () {
 		batch = new SpriteBatch();
 		font = new BitmapFont();
-		this.setScreen(new Stage2(this));
+		this.setScreen(new Menu(this));
 	}
 
 	@Override

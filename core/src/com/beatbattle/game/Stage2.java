@@ -6,9 +6,11 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.beatbattle.game.BeatBattle;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 public class Stage2 implements Screen {
 
@@ -18,6 +20,7 @@ public class Stage2 implements Screen {
     ExtendViewport viewport;
     WriteTrack track;
     BasicBeat beat;
+    Texture background;
 
     public Stage2(final BeatBattle game) {
         this.game = game;
@@ -26,7 +29,7 @@ public class Stage2 implements Screen {
         viewport = new ExtendViewport(800, 600, camera);
         viewport.apply();
         track = new WriteTrack((int) viewport.getMinWorldWidth()/2, 100);
-        beat = new BasicBeat(50,50);
+        background = new Texture(Gdx.files.internal("bg.jpg"));
     }
 
     @Override
@@ -41,6 +44,7 @@ public class Stage2 implements Screen {
         game.batch.setProjectionMatrix(camera.combined);
         game.batch.begin();
 
+        game.batch.draw(background,0,0);
         track.run(game.batch, 100, delta);
 
         game.batch.end();
