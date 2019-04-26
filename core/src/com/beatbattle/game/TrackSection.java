@@ -44,6 +44,16 @@ public class TrackSection {
         setTex(bPatt);
     }
 
+    public Boolean isEmpty() {
+        if (bPatt[0] == 0 && bPatt[1] == 0 && bPatt[2] == 0)
+            return true;
+        return false;
+    }
+
+    public int[] getPatt() {
+        return bPatt;
+    }
+
     public Texture getTex() {
         return tex;
     }

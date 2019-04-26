@@ -60,10 +60,8 @@ public class WriteTrack extends Track {
             sSprite.draw(batch);
         }
 
-        if (super.getPlayer().getBeats() > 0) {
-            if (super.getControlScheme() == 1) CheckAKeyPresses();
-            if (super.getControlScheme() == 2) CheckLKeyPresses();
-        }
+        if (super.getControlScheme() == 1) CheckAKeyPresses();
+        if (super.getControlScheme() == 2) CheckLKeyPresses();
 
         //metronome
         if (shift > super.getSectSprites().get(0).getHeight()/2 && ticked == false) {
@@ -74,6 +72,11 @@ public class WriteTrack extends Track {
         if (shift > super.getSectSprites().get(0).getHeight()) {
             loopSection();
             shift = 0;
+
+            //if nothing was pressed and sect is empty lose health
+            if (!(apres || spres || dpres) && super.getSects().get(4).isEmpty()) {
+                super.getPlayer().subtractHealth();
+            }
             apres = false;
             spres = false;
             dpres = false;
@@ -118,12 +121,22 @@ public class WriteTrack extends Track {
     private void CheckAKeyPresses (){
         if (Gdx.input.isKeyPressed(Input.Keys.A)) {
             if (apres == false && arele == true && beatlayed == false) {
-                super.getSects().get(4).setPatt(1, 0, 0);
-                super.getSects().get(4).setTrack(super.getControlScheme());
-                super.getSects().get(4).setCount(super.getSects().size());
-                beatlayed = true;
-                kick.play();
-                super.getPlayer().subtractBeat();
+                TrackSection sect = super.getSects().get(4);
+                //if a beat hasn't been layed
+                if (sect.isEmpty() && super.getPlayer().getBeats() > 0) {
+                    sect.setPatt(1, 0, 0);
+                    sect.setTrack(super.getControlScheme());
+                    sect.setCount(super.getSects().size());
+                    beatlayed = true;
+                    kick.play();
+                    super.getPlayer().subtractBeat();
+                }
+                else {
+                    //if you didn't hit the right beat
+                    if (!(sect.getPatt()[0] == 1 && sect.getPatt()[1] == 0 && sect.getPatt()[2] == 0)) {
+                        super.getPlayer().subtractHealth();
+                    }
+                }
                 apres = true;
                 arele = false;
             }

@@ -14,6 +14,7 @@ public class Player {
 
     public int getHealth() { return health; }
     public void setHealth(int h) { health = h; }
+    public void subtractHealth() { health -= 1;}
 
     public int getBeats() { return beats; }
     public void setBeats(int b) { beats = b; }
