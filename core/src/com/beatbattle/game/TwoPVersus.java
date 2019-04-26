@@ -44,7 +44,7 @@ public class TwoPVersus implements Screen {
         this.game = game;
 
         camera = new OrthographicCamera();
-        viewport = new ExtendViewport(1100, 600, camera);
+        viewport = new ExtendViewport(1100, 700, camera);
         viewport.apply();
 
         pattern = new LinkedList<TrackSection>();
@@ -81,7 +81,7 @@ public class TwoPVersus implements Screen {
         game.batch.draw(background,0,0);
 
         //draw counter
-        game.font.draw(game.batch, String.valueOf(track1.getCounter()), viewport.getMinWorldWidth()/2 - 12, 280);
+        game.font.draw(game.batch, String.valueOf(track1.getCounter()), viewport.getMinWorldWidth()/2 - 12, 340);
 
         //draw beat trackers
         game.font.draw(game.batch, String.valueOf(track1.getPlayer().getBeats()), 15, 40);

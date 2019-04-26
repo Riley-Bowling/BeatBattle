@@ -14,8 +14,8 @@ public class WriteTrack extends Track {
     private float shift = 0;
     //variables for tracking if the three keys have been pressed/released within each section of the track
 
-    private Boolean apres, spres, dpres = false;
-    private Boolean arele, srele, drele = true;
+    private Boolean apres, spres, dpres;
+    private Boolean arele, srele, drele;
 
     //tracks if metronome has sounded within a section
     private Boolean ticked = false;
@@ -33,6 +33,14 @@ public class WriteTrack extends Track {
         super(x, BPM, t, c);
         //beats per loop = 12
         super.setCounter(12);
+        apres = false;
+        spres = false;
+        dpres = false;
+
+        arele = true;
+        srele = true;
+        drele = true;
+
         for (int i = 0; i < 12; i++) {
             if (super.getControlScheme() == 1) {
                 super.getSects().add(new TrackSection(0, 0, 0, 3, -1));
@@ -74,7 +82,7 @@ public class WriteTrack extends Track {
             shift = 0;
 
             //if nothing was pressed and sect is empty lose health
-            if (!(apres || spres || dpres) && super.getSects().get(4).isEmpty()) {
+            if (((apres == true|| spres == true || dpres == true) != true) && super.getSects().get(4).isEmpty() == false) {
                 super.getPlayer().subtractHealth();
             }
             apres = false;
@@ -146,83 +154,128 @@ public class WriteTrack extends Track {
 
         if (Gdx.input.isKeyPressed(Input.Keys.S)) {
             if (spres == false && srele == true && beatlayed == false) {
-                super.getSects().get(4).setPatt(0, 1, 0);
-                super.getSects().get(4).setTrack(super.getControlScheme());
-                super.getSects().get(4).setCount(super.getSects().size());
-                beatlayed = true;
-                snare.play();
-                super.getPlayer().subtractBeat();
-                spres = true;
-                srele = false;
+                TrackSection sect = super.getSects().get(4);
+                //if a beat hasn't been layed
+                if (sect.isEmpty() && super.getPlayer().getBeats() > 0) {
+                    sect.setPatt(0, 1, 0);
+                    sect.setTrack(super.getControlScheme());
+                    sect.setCount(super.getSects().size());
+                    beatlayed = true;
+                    snare.play();
+                    super.getPlayer().subtractBeat();
+                } else {
+                    //if you didn't hit the right beat
+                    if (!(sect.getPatt()[0] == 0 && sect.getPatt()[1] == 1 && sect.getPatt()[2] == 0)) {
+                        super.getPlayer().subtractHealth();
+                    }
+                }
+                apres = true;
+                arele = false;
+            } else {
+                srele = true;
             }
-        } else {
-            srele = true;
         }
 
         if (Gdx.input.isKeyPressed(Input.Keys.D)) {
             if (dpres == false && drele == true && beatlayed == false) {
-                super.getSects().get(4).setPatt(0, 0, 1);
-                super.getSects().get(4).setTrack(super.getControlScheme());
-                super.getSects().get(4).setCount(super.getSects().size());
-                beatlayed = true;
-                hihat.play();
-                super.getPlayer().subtractBeat();
-                dpres = true;
-                drele = false;
+                TrackSection sect = super.getSects().get(4);
+                //if a beat hasn't been layed
+                if (sect.isEmpty() && super.getPlayer().getBeats() > 0) {
+                    sect.setPatt(0, 0, 1);
+                    sect.setTrack(super.getControlScheme());
+                    sect.setCount(super.getSects().size());
+                    beatlayed = true;
+                    hihat.play();
+                    super.getPlayer().subtractBeat();
+                } else {
+                    //if you didn't hit the right beat
+                    if (!(sect.getPatt()[0] == 01 && sect.getPatt()[1] == 0 && sect.getPatt()[2] == 1)) {
+                        super.getPlayer().subtractHealth();
+                    }
+                }
+                apres = true;
+                arele = false;
+            } else {
+                drele = true;
             }
-        } else {
-            drele = true;
         }
-
     }
+
 
     private void CheckLKeyPresses() {
         if (Gdx.input.isKeyPressed(Input.Keys.L)) {
             if (apres == false && arele == true && beatlayed == false) {
-                super.getSects().get(4).setPatt(1, 0, 0);
-                super.getSects().get(4).setTrack(super.getControlScheme());
-                super.getSects().get(4).setCount(super.getSects().size());
-                beatlayed = true;
-                kick.play();
-                super.getPlayer().subtractBeat();
+                TrackSection sect = super.getSects().get(4);
+                //if a beat hasn't been layed
+                if (sect.isEmpty() && super.getPlayer().getBeats() > 0) {
+                    sect.setPatt(1, 0, 0);
+                    sect.setTrack(super.getControlScheme());
+                    sect.setCount(super.getSects().size());
+                    beatlayed = true;
+                    kick.play();
+                    super.getPlayer().subtractBeat();
+                } else {
+                    //if you didn't hit the right beat
+                    if (!(sect.getPatt()[0] == 1 && sect.getPatt()[1] == 0 && sect.getPatt()[2] == 0)) {
+                        super.getPlayer().subtractHealth();
+                    }
+                }
                 apres = true;
                 arele = false;
+            } else {
+                arele = true;
             }
-        } else {
-            arele = true;
         }
 
         if (Gdx.input.isKeyPressed(Input.Keys.SEMICOLON)) {
             if (spres == false && srele == true && beatlayed == false) {
-                super.getSects().get(4).setPatt(0, 1, 0);
-                super.getSects().get(4).setTrack(super.getControlScheme());
-                super.getSects().get(4).setCount(super.getSects().size());
-                beatlayed = true;
-                snare.play();
-                super.getPlayer().subtractBeat();
-                spres = true;
-                srele = false;
+                TrackSection sect = super.getSects().get(4);
+                //if a beat hasn't been layed
+                if (sect.isEmpty() && super.getPlayer().getBeats() > 0) {
+                    sect.setPatt(0, 1, 0);
+                    sect.setTrack(super.getControlScheme());
+                    sect.setCount(super.getSects().size());
+                    beatlayed = true;
+                    snare.play();
+                    super.getPlayer().subtractBeat();
+                } else {
+                    //if you didn't hit the right beat
+                    if (!(sect.getPatt()[0] == 0 && sect.getPatt()[1] == 1 && sect.getPatt()[2] == 0)) {
+                        super.getPlayer().subtractHealth();
+                    }
+                }
+                apres = true;
+                arele = false;
+            } else {
+                srele = true;
             }
-        } else {
-            srele = true;
         }
 
         if (Gdx.input.isKeyPressed(Input.Keys.APOSTROPHE)) {
             if (dpres == false && drele == true && beatlayed == false) {
-                super.getSects().get(4).setPatt(0, 0, 1);
-                super.getSects().get(4).setTrack(super.getControlScheme());
-                super.getSects().get(4).setCount(super.getSects().size());
-                beatlayed = true;
-                hihat.play();
-                super.getPlayer().subtractBeat();
-                dpres = true;
-                drele = false;
-            }
+                TrackSection sect = super.getSects().get(4);
+                //if a beat hasn't been layed
+                if (sect.isEmpty() && super.getPlayer().getBeats() > 0) {
+                    sect.setPatt(0, 0, 1);
+                    sect.setTrack(super.getControlScheme());
+                    sect.setCount(super.getSects().size());
+                    beatlayed = true;
+                    hihat.play();
+                    super.getPlayer().subtractBeat();
+                }
+                else {
+                    //if you didn't hit the right beat
+                    if (!(sect.getPatt()[0] == 0 && sect.getPatt()[1] == 0 && sect.getPatt()[2] == 1)) {
+                        super.getPlayer().subtractHealth();
+                    }
+                }
+                apres = true;
+                arele = false;
         } else {
             drele = true;
         }
 
     }
 
-
+    }
 }

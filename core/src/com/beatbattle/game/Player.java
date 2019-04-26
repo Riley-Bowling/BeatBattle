@@ -9,7 +9,7 @@ public class Player {
         //default health
         health = 3;
         //default beats
-        beats = 2;
+        beats = 6;
     }
 
     public int getHealth() { return health; }
