@@ -16,6 +16,7 @@ public class WriteTrack extends Track {
 
     private Boolean apres, spres, dpres;
     private Boolean arele, srele, drele;
+    private Boolean flip;
 
     //tracks if metronome has sounded within a section
     private Boolean ticked = false;
@@ -40,6 +41,8 @@ public class WriteTrack extends Track {
         arele = true;
         srele = true;
         drele = true;
+
+        flip = true;
 
         for (int i = 0; i < 12; i++) {
             if (super.getControlScheme() == 1) {
@@ -78,13 +81,16 @@ public class WriteTrack extends Track {
         }
 
         if (shift > super.getSectSprites().get(0).getHeight()) {
-            loopSection();
-            shift = 0;
+
 
             //if nothing was pressed and sect is empty lose health
             if (((apres == true|| spres == true || dpres == true) != true) && super.getSects().get(4).isEmpty() == false) {
                 super.getPlayer().subtractHealth();
             }
+
+            loopSection();
+            shift = 0;
+
             apres = false;
             spres = false;
             dpres = false;
@@ -169,8 +175,8 @@ public class WriteTrack extends Track {
                         super.getPlayer().subtractHealth();
                     }
                 }
-                apres = true;
-                arele = false;
+                spres = true;
+                srele = false;
             } else {
                 srele = true;
             }
@@ -193,8 +199,8 @@ public class WriteTrack extends Track {
                         super.getPlayer().subtractHealth();
                     }
                 }
-                apres = true;
-                arele = false;
+                dpres = true;
+                drele = false;
             } else {
                 drele = true;
             }
@@ -244,8 +250,8 @@ public class WriteTrack extends Track {
                         super.getPlayer().subtractHealth();
                     }
                 }
-                apres = true;
-                arele = false;
+                spres = true;
+                srele = false;
             } else {
                 srele = true;
             }
@@ -269,8 +275,8 @@ public class WriteTrack extends Track {
                         super.getPlayer().subtractHealth();
                     }
                 }
-                apres = true;
-                arele = false;
+                dpres = true;
+                drele = false;
         } else {
             drele = true;
         }

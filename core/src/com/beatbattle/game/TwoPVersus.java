@@ -85,11 +85,11 @@ public class TwoPVersus implements Screen {
 
         //draw beat trackers
         game.font.draw(game.batch, String.valueOf(track1.getPlayer().getBeats()), 15, 40);
-        game.font.draw(game.batch, String.valueOf(track2.getPlayer().getBeats()), viewport.getMinWorldWidth() - 30, 40);
+        game.font.draw(game.batch, String.valueOf(track2.getPlayer().getBeats()), viewport.getMinWorldWidth() - 40, 40);
 
         //draw life trackers
-        game.font.draw(game.batch, String.valueOf(track1.getPlayer().getHealth()), 15, viewport.getMinWorldHeight() - 20);
-        game.font.draw(game.batch, String.valueOf(track2.getPlayer().getHealth()), viewport.getMinWorldWidth() - 30, viewport.getMinWorldHeight() - 20);
+        game.font.draw(game.batch, String.valueOf(track1.getPlayer().getHealth()), 15, viewport.getMinWorldHeight() + 70);
+        game.font.draw(game.batch, String.valueOf(track2.getPlayer().getHealth()), viewport.getMinWorldWidth() - 40, viewport.getMinWorldHeight() + 70);
 
         track1.run(game.batch, 100, delta);
         track2.run(game.batch, 100, delta);
