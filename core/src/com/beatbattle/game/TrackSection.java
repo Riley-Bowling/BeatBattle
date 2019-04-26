@@ -6,12 +6,15 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 public class TrackSection {
     int[] bPatt;
     private Texture tex;
+    // 3 = both
+    private int track;
 
-    public TrackSection(int a, int b, int c) {
+    public TrackSection(int a, int b, int c, int t) {
         bPatt = new int[3];
         bPatt[0] = a;
         bPatt[1] = b;
         bPatt[2] = c;
+        track = t;
         setTex(bPatt);
     }
 
@@ -41,5 +44,13 @@ public class TrackSection {
 
     public Texture getTex() {
         return tex;
+    }
+
+    public int getTrack() {
+        return track;
+    }
+
+    public void setTrack(int t) {
+        track = t;
     }
 }

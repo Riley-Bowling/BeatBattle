@@ -3,6 +3,7 @@ package com.beatbattle.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -27,13 +28,14 @@ public class WriteTrack extends Track {
     private Sound hihat = Gdx.audio.newSound(Gdx.files.internal("DrumKit/hihat.wav"));
     private Sound tick = Gdx.audio.newSound(Gdx.files.internal("DrumKit/tick.wav"));
 
+    private Texture track = new Texture("track.png");
     public WriteTrack(int x, int BPM, LinkedList<TrackSection> t, int c){
         super(x, BPM, t, c);
         //beats per loop = 12
         super.setCounter(12);
         for (int i = 0; i < 12; i++) {
             if (super.getControlScheme() == 1) {
-                super.getSects().add(new TrackSection(0, 0, 0));
+                super.getSects().add(new TrackSection(0, 0, 0, 3));
             }
 
             Sprite sSprite = new Sprite(super.getSects().get(i).getTex());
@@ -48,7 +50,12 @@ public class WriteTrack extends Track {
         shift += (super.getSpeed() * delta);
         for (int i = super.getSects().size() - 1; i >= 0; i--) {
             Sprite sSprite = super.getSectSprites().get(i);
-            sSprite.setTexture(super.getSects().get(i).getTex());
+            if (super.getSects().get(i).getTrack() == super.getControlScheme() || super.getSects().get(i).getTrack() == 3) {
+                sSprite.setTexture(super.getSects().get(i).getTex());
+            }
+            else {
+                sSprite.setTexture(track);
+            }
             sSprite.translateY(super.getSpeed() * delta);
             sSprite.draw(batch);
         }
@@ -60,7 +67,7 @@ public class WriteTrack extends Track {
 
         //metronome
         if (shift > super.getSectSprites().get(0).getHeight()/2 && ticked == false) {
-            tick.play(0.2f);
+            tick.play(0.1f);
             ticked = true;
         }
 
@@ -93,6 +100,10 @@ public class WriteTrack extends Track {
             sSprite.setPosition(super.getXpos() - sSprite.getWidth() / 2, i * sSprite.getHeight() - 60);
         }
         if (super.getCounter() == 1) {
+            for (int i = super.getSects().size() - 1; i >= 0; i--) {
+                super.getSects().get(i).setTrack(3);
+
+            }
             super.setCounter(super.getSects().size());
         }
         else {
@@ -104,6 +115,7 @@ public class WriteTrack extends Track {
         if (Gdx.input.isKeyPressed(Input.Keys.A)) {
             if (apres == false && arele == true && beatlayed == false) {
                 super.getSects().get(2).setPatt(1, 0, 0);
+                super.getSects().get(2).setTrack(super.getControlScheme());
                 beatlayed = true;
                 kick.play();
                 super.getPlayer().subtractBeat();
@@ -117,6 +129,7 @@ public class WriteTrack extends Track {
         if (Gdx.input.isKeyPressed(Input.Keys.S)) {
             if (spres == false && srele == true && beatlayed == false) {
                 super.getSects().get(2).setPatt(0, 1, 0);
+                super.getSects().get(2).setTrack(super.getControlScheme());
                 beatlayed = true;
                 snare.play();
                 super.getPlayer().subtractBeat();
@@ -130,6 +143,7 @@ public class WriteTrack extends Track {
         if (Gdx.input.isKeyPressed(Input.Keys.D)) {
             if (dpres == false && drele == true && beatlayed == false) {
                 super.getSects().get(2).setPatt(0, 0, 1);
+                super.getSects().get(2).setTrack(super.getControlScheme());
                 beatlayed = true;
                 hihat.play();
                 super.getPlayer().subtractBeat();
@@ -146,6 +160,7 @@ public class WriteTrack extends Track {
         if (Gdx.input.isKeyPressed(Input.Keys.L)) {
             if (apres == false && arele == true && beatlayed == false) {
                 super.getSects().get(2).setPatt(1, 0, 0);
+                super.getSects().get(2).setTrack(super.getControlScheme());
                 beatlayed = true;
                 kick.play();
                 super.getPlayer().subtractBeat();
@@ -159,6 +174,7 @@ public class WriteTrack extends Track {
         if (Gdx.input.isKeyPressed(Input.Keys.SEMICOLON)) {
             if (spres == false && srele == true && beatlayed == false) {
                 super.getSects().get(2).setPatt(0, 1, 0);
+                super.getSects().get(2).setTrack(super.getControlScheme());
                 beatlayed = true;
                 snare.play();
                 super.getPlayer().subtractBeat();
@@ -172,6 +188,7 @@ public class WriteTrack extends Track {
         if (Gdx.input.isKeyPressed(Input.Keys.APOSTROPHE)) {
             if (dpres == false && drele == true && beatlayed == false) {
                 super.getSects().get(2).setPatt(0, 0, 1);
+                super.getSects().get(2).setTrack(super.getControlScheme());
                 beatlayed = true;
                 hihat.play();
                 super.getPlayer().subtractBeat();
