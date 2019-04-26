@@ -33,6 +33,7 @@ public class Stage2 implements Screen {
     BasicBeat beat;
 
     //UI elements
+    Sprite border, border2;
     Texture background;
     LabelStyle trackerStyle;
 
@@ -46,6 +47,14 @@ public class Stage2 implements Screen {
         track2 = new WriteTrack((int) (viewport.getMinWorldWidth() - viewport.getMinWorldWidth()/4), 100, 2);
         background = new Texture(Gdx.files.internal("bg.jpg"));
 
+        border = new Sprite(new Texture(Gdx.files.internal("border.png")));
+        border.setSize(330,110);
+        border.setPosition(track1.getXpos() - 150 - 15, 60);
+        game.font.getData().setScale(2,2);
+
+        border2 = new Sprite(new Texture(Gdx.files.internal("border2.png")));
+        border2.setSize(330,110);
+        border2.setPosition(track2.getXpos() - 150 - 15, 60);
         game.font.getData().setScale(2,2);;
     }
 
@@ -63,12 +72,22 @@ public class Stage2 implements Screen {
 
         game.batch.draw(background,0,0);
 
-        //draw beats
+        //draw counter
+        game.font.draw(game.batch, String.valueOf(track1.getCounter()), viewport.getMinWorldWidth()/2 - 12, 120);
+
+        //draw beat trackers
         game.font.draw(game.batch, String.valueOf(track1.getPlayer().getBeats()), 15, 40);
         game.font.draw(game.batch, String.valueOf(track2.getPlayer().getBeats()), viewport.getMinWorldWidth() - 30, 40);
 
+        //draw life trackers
+        game.font.draw(game.batch, String.valueOf(track1.getPlayer().getHealth()), 15, viewport.getMinWorldHeight() - 20);
+        game.font.draw(game.batch, String.valueOf(track2.getPlayer().getHealth()), viewport.getMinWorldWidth() - 30, viewport.getMinWorldHeight() - 20);
+
         track1.run(game.batch, 100, delta);
         track2.run(game.batch, 100, delta);
+
+        border.draw(game.batch);
+        border2.draw(game.batch);
 
         game.batch.end();
 

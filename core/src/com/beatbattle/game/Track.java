@@ -14,6 +14,7 @@ public abstract class Track {
     private int BPM;
     private Player player;
     private int controlScheme;
+    private int counter;
 
     public Track(int x, int s, int c){
         this.xpos = x;
@@ -26,6 +27,21 @@ public abstract class Track {
     public int getXpos() {
         return xpos;
     }
+
+    public int getCounter() {
+        return counter;
+    }
+
+    public void setCounter(int c) {
+        counter = c;
+    }
+
+    public void subtractCounter() {
+        if(counter > 0) {
+            counter -= 1;
+        }
+    }
+
     public float getSpeed() {
         //BPM -> speed math
         return (float) BPM - 20;
