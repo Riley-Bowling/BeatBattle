@@ -44,24 +44,24 @@ public class TwoPVersus implements Screen {
         this.game = game;
 
         camera = new OrthographicCamera();
-        viewport = new ExtendViewport(800, 600, camera);
+        viewport = new ExtendViewport(1100, 600, camera);
         viewport.apply();
 
         pattern = new LinkedList<TrackSection>();
 
         //length of track before looping
-        track1 = new WriteTrack((int) viewport.getMinWorldWidth()/4, 80, pattern, 1);
-        track2 = new WriteTrack((int) (viewport.getMinWorldWidth() - viewport.getMinWorldWidth()/4), 80, pattern, 2);
+        track1 = new WriteTrack((int) viewport.getMinWorldWidth()/4, 100, pattern, 1);
+        track2 = new WriteTrack((int) (viewport.getMinWorldWidth() - viewport.getMinWorldWidth()/4), 100, pattern, 2);
         background = new Texture(Gdx.files.internal("bg.jpg"));
 
         border = new Sprite(new Texture(Gdx.files.internal("border.png")));
-        border.setSize(330,110);
-        border.setPosition(track1.getXpos() - 150 - 15, 60);
+        border.setSize(430,120);
+        border.setPosition(track1.getXpos() - 200 - 15, 280);
         game.font.getData().setScale(2,2);
 
         border2 = new Sprite(new Texture(Gdx.files.internal("border2.png")));
-        border2.setSize(330,110);
-        border2.setPosition(track2.getXpos() - 150 - 15, 60);
+        border2.setSize(430,120);
+        border2.setPosition(track2.getXpos() - 200 - 15, 280);
         game.font.getData().setScale(2,2);;
 
     }
@@ -81,7 +81,7 @@ public class TwoPVersus implements Screen {
         game.batch.draw(background,0,0);
 
         //draw counter
-        game.font.draw(game.batch, String.valueOf(track1.getCounter()), viewport.getMinWorldWidth()/2 - 12, 120);
+        game.font.draw(game.batch, String.valueOf(track1.getCounter()), viewport.getMinWorldWidth()/2 - 12, 280);
 
         //draw beat trackers
         game.font.draw(game.batch, String.valueOf(track1.getPlayer().getBeats()), 15, 40);

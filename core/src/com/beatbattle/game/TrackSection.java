@@ -8,13 +8,15 @@ public class TrackSection {
     private Texture tex;
     // 3 = both
     private int track;
+    private int count;
 
-    public TrackSection(int a, int b, int c, int t) {
+    public TrackSection(int a, int b, int c, int t, int co) {
         bPatt = new int[3];
         bPatt[0] = a;
         bPatt[1] = b;
         bPatt[2] = c;
         track = t;
+        count = co;
         setTex(bPatt);
     }
 
@@ -52,5 +54,17 @@ public class TrackSection {
 
     public void setTrack(int t) {
         track = t;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int t) {
+        count = t;
+    }
+
+    public void subtractCount() {
+        count -= 1;
     }
 }
