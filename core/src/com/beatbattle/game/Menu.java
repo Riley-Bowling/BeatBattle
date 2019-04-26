@@ -168,9 +168,9 @@ public class Menu implements Screen{
         stage.addActor(label);
         stage.addActor(label2);
         stage.addActor(textbutton);
-        stage.addActor( BPM_Button);
-        stage.addActor( Volume_Button);
-        stage.addActor( Metronome_Button);
+        stage.addActor(BPM_Button);
+        stage.addActor(Volume_Button);
+        stage.addActor(Metronome_Button);
 
 
         // table.setPosition( stage.getWidth()/2-table.getWidth()/2, stage.getHeight()/2-table.getHeight()/2 );

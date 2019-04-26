@@ -11,6 +11,17 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.beatbattle.game.BeatBattle;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Button.ButtonStyle;
+import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.graphics.Color;
+
 
 public class Stage2 implements Screen {
 
@@ -20,7 +31,10 @@ public class Stage2 implements Screen {
     ExtendViewport viewport;
     WriteTrack track1, track2;
     BasicBeat beat;
+
+    //UI elements
     Texture background;
+    LabelStyle trackerStyle;
 
     public Stage2(final BeatBattle game) {
         this.game = game;
@@ -31,6 +45,8 @@ public class Stage2 implements Screen {
         track1 = new WriteTrack((int) viewport.getMinWorldWidth()/4, 100, 1);
         track2 = new WriteTrack((int) (viewport.getMinWorldWidth() - viewport.getMinWorldWidth()/4), 100, 2);
         background = new Texture(Gdx.files.internal("bg.jpg"));
+
+        game.font.getData().setScale(2,2);;
     }
 
     @Override
@@ -46,6 +62,11 @@ public class Stage2 implements Screen {
         game.batch.begin();
 
         game.batch.draw(background,0,0);
+
+        //draw beats
+        game.font.draw(game.batch, String.valueOf(track1.getPlayer().getBeats()), 15, 40);
+        game.font.draw(game.batch, String.valueOf(track2.getPlayer().getBeats()), viewport.getMinWorldWidth() - 30, 40);
+
         track1.run(game.batch, 100, delta);
         track2.run(game.batch, 100, delta);
 
