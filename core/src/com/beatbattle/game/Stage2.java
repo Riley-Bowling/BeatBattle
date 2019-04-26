@@ -28,8 +28,8 @@ public class Stage2 implements Screen {
         camera = new OrthographicCamera();
         viewport = new ExtendViewport(800, 600, camera);
         viewport.apply();
-        track1 = new WriteTrack((int) viewport.getMinWorldWidth()/4, 100);
-        track2 = new WriteTrack((int) (viewport.getMinWorldWidth() - viewport.getMinWorldWidth()/4), 100);
+        track1 = new WriteTrack((int) viewport.getMinWorldWidth()/4, 100, 1);
+        track2 = new WriteTrack((int) (viewport.getMinWorldWidth() - viewport.getMinWorldWidth()/4), 100, 2);
         background = new Texture(Gdx.files.internal("bg.jpg"));
     }
 

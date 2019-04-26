@@ -27,8 +27,8 @@ public class WriteTrack extends Track {
     private Sound hihat = Gdx.audio.newSound(Gdx.files.internal("DrumKit/hihat.wav"));
     private Sound tick = Gdx.audio.newSound(Gdx.files.internal("DrumKit/tick.wav"));
 
-    public WriteTrack(int x, int BPM){
-        super(x, BPM);
+    public WriteTrack(int x, int BPM, int c){
+        super(x, BPM, c);
         for (int i = 0; i < 16; i++) {
             super.getSects().add(new TrackSection(0, 0, 0));
             Sprite sSprite = super.getSects().get(i).getSprite();
@@ -45,60 +45,10 @@ public class WriteTrack extends Track {
             sSprite.draw(batch);
         }
 
-        if (Gdx.input.isKeyPressed(Input.Keys.A)) {
-            if (apres == false && arele == true && beatlayed == false) {
-                super.getSects().get(1).setPatt(1, 0, 0);
-                beatlayed = true;
-                kick.play();
-                apres = true;
-                arele = false;
-            }
+        if (super.getPlayer().getBeats() > 0) {
+            if (super.getControlScheme() == 1) CheckAKeyPresses();
+            if (super.getControlScheme() == 2) CheckLKeyPresses();
         }
-        else {
-            arele = true;
-        }
-
-        if (Gdx.input.isKeyPressed(Input.Keys.S)) {
-            if (spres == false && srele == true && beatlayed == false) {
-                super.getSects().get(1).setPatt(0, 1, 0);
-                beatlayed = true;
-                snare.play();
-                spres = true;
-                srele = false;
-            }
-        }
-        else {
-            srele = true;
-        }
-
-        if (Gdx.input.isKeyPressed(Input.Keys.D)) {
-            if (dpres == false && drele == true && beatlayed == false) {
-                super.getSects().get(1).setPatt(0, 0, 1);
-                beatlayed = true;
-                hihat.play();
-                dpres = true;
-                drele = false;
-            }
-        }
-        else {
-            drele = true;
-        }
-
-            /*if (Gdx.input.isKeyPressed(Input.Keys.D) && Gdx.input.isKeyPressed(Input.Keys.A)) {
-                super.getSects().get(0).setPatt(1, 0, 1);
-                kick.play();
-                hihat.play();
-            }
-            if (Gdx.input.isKeyPressed(Input.Keys.A) && Gdx.input.isKeyPressed(Input.Keys.S)) {
-                super.getSects().get(0).setPatt(1, 1, 0);
-                kick.play();
-                snare.play();
-            }
-            if (Gdx.input.isKeyPressed(Input.Keys.S) && Gdx.input.isKeyPressed(Input.Keys.D)) {
-                super.getSects().get(0).setPatt(0, 1, 1);
-                snare.play();
-                hihat.play();
-            }*/
 
         //metronome
         if (shift > super.getSects().get(0).getSprite().getHeight()/2 && ticked == false) {
@@ -132,5 +82,90 @@ public class WriteTrack extends Track {
             sSprite.setPosition(super.getXpos() - sSprite.getWidth() / 2, i * sSprite.getHeight() - 60);
         }
     }
+
+    private void CheckAKeyPresses (){
+        if (Gdx.input.isKeyPressed(Input.Keys.A)) {
+            if (apres == false && arele == true && beatlayed == false) {
+                super.getSects().get(1).setPatt(1, 0, 0);
+                beatlayed = true;
+                kick.play();
+                super.getPlayer().subtractBeat();
+                apres = true;
+                arele = false;
+            }
+        } else {
+            arele = true;
+        }
+
+        if (Gdx.input.isKeyPressed(Input.Keys.S)) {
+            if (spres == false && srele == true && beatlayed == false) {
+                super.getSects().get(1).setPatt(0, 1, 0);
+                beatlayed = true;
+                snare.play();
+                super.getPlayer().subtractBeat();
+                spres = true;
+                srele = false;
+            }
+        } else {
+            srele = true;
+        }
+
+        if (Gdx.input.isKeyPressed(Input.Keys.D)) {
+            if (dpres == false && drele == true && beatlayed == false) {
+                super.getSects().get(1).setPatt(0, 0, 1);
+                beatlayed = true;
+                hihat.play();
+                super.getPlayer().subtractBeat();
+                dpres = true;
+                drele = false;
+            }
+        } else {
+            drele = true;
+        }
+
+    }
+
+    private void CheckLKeyPresses() {
+        if (Gdx.input.isKeyPressed(Input.Keys.L)) {
+            if (apres == false && arele == true && beatlayed == false) {
+                super.getSects().get(1).setPatt(1, 0, 0);
+                beatlayed = true;
+                kick.play();
+                super.getPlayer().subtractBeat();
+                apres = true;
+                arele = false;
+            }
+        } else {
+            arele = true;
+        }
+
+        if (Gdx.input.isKeyPressed(Input.Keys.SEMICOLON)) {
+            if (spres == false && srele == true && beatlayed == false) {
+                super.getSects().get(1).setPatt(0, 1, 0);
+                beatlayed = true;
+                snare.play();
+                super.getPlayer().subtractBeat();
+                spres = true;
+                srele = false;
+            }
+        } else {
+            srele = true;
+        }
+
+        if (Gdx.input.isKeyPressed(Input.Keys.APOSTROPHE)) {
+            if (dpres == false && drele == true && beatlayed == false) {
+                super.getSects().get(1).setPatt(0, 0, 1);
+                beatlayed = true;
+                hihat.play();
+                super.getPlayer().subtractBeat();
+                dpres = true;
+                drele = false;
+            }
+        } else {
+            drele = true;
+        }
+
+    }
+
 
 }

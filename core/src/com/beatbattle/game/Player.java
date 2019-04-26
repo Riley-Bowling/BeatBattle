@@ -1,14 +1,15 @@
-
+package com.beatbattle.game;
 
 
 public class Player {
 
     private int health, beats;
 
-    public Player(int b) {
+    public Player() {
         //default health
-        this.health = 3;
-        this.beats = beats;
+        health = 3;
+        //default beats
+        beats = 2;
     }
 
     public int getHealth() { return health; }
