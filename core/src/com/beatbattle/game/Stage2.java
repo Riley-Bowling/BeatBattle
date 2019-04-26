@@ -18,7 +18,7 @@ public class Stage2 implements Screen {
 
     OrthographicCamera camera;
     ExtendViewport viewport;
-    WriteTrack track;
+    WriteTrack track1, track2;
     BasicBeat beat;
     Texture background;
 
@@ -28,7 +28,8 @@ public class Stage2 implements Screen {
         camera = new OrthographicCamera();
         viewport = new ExtendViewport(800, 600, camera);
         viewport.apply();
-        track = new WriteTrack((int) viewport.getMinWorldWidth()/2, 100);
+        track1 = new WriteTrack((int) viewport.getMinWorldWidth()/4, 100);
+        track2 = new WriteTrack((int) (viewport.getMinWorldWidth() - viewport.getMinWorldWidth()/4), 100);
         background = new Texture(Gdx.files.internal("bg.jpg"));
     }
 
@@ -45,7 +46,8 @@ public class Stage2 implements Screen {
         game.batch.begin();
 
         game.batch.draw(background,0,0);
-        track.run(game.batch, 100, delta);
+        track1.run(game.batch, 100, delta);
+        track2.run(game.batch, 100, delta);
 
         game.batch.end();
 

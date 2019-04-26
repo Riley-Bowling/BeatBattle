@@ -13,12 +13,8 @@ public class WriteTrack extends Track {
     private float shift = 0;
     //variables for tracking if the three keys have been pressed/released within each section of the track
 
-    private Boolean apres = false;
-    private Boolean arele = true;
-    private Boolean spres = false;
-    private Boolean srele = true;
-    private Boolean dpres = false;
-    private Boolean drele = true;
+    private Boolean apres, spres, dpres = false;
+    private Boolean arele, srele, drele = true;
 
     //tracks if metronome has sounded within a section
     private Boolean ticked = false;
