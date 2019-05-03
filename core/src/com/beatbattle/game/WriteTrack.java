@@ -182,6 +182,9 @@ public class WriteTrack extends Track {
                         super.getPlayer().subtractHealth();
                         NO.play(0.5f);
                     }
+                    else {
+                        snare.play();
+                    }
                 }
                 spres = true;
                 srele = false;
@@ -203,9 +206,12 @@ public class WriteTrack extends Track {
                     super.getPlayer().subtractBeat();
                 } else {
                     //if you didn't hit the right beat
-                    if (!(sect.getPatt()[0] == 01 && sect.getPatt()[1] == 0 && sect.getPatt()[2] == 1)) {
+                    if (!(sect.getPatt()[0] == 0 && sect.getPatt()[1] == 0 && sect.getPatt()[2] == 1)) {
                         super.getPlayer().subtractHealth();
                         NO.play(0.5f);
+                    }
+                    else {
+                        hihat.play();
                     }
                 }
                 dpres = true;
@@ -235,6 +241,9 @@ public class WriteTrack extends Track {
                         super.getPlayer().subtractHealth();
                         NO.play(0.5f);
                     }
+                    else {
+                        kick.play();
+                    }
                 }
                 apres = true;
                 arele = false;
@@ -259,6 +268,9 @@ public class WriteTrack extends Track {
                     if (!(sect.getPatt()[0] == 0 && sect.getPatt()[1] == 1 && sect.getPatt()[2] == 0)) {
                         super.getPlayer().subtractHealth();
                         NO.play(0.5f);
+                    }
+                    else {
+                        snare.play();
                     }
                 }
                 spres = true;
@@ -285,6 +297,9 @@ public class WriteTrack extends Track {
                     if (!(sect.getPatt()[0] == 0 && sect.getPatt()[1] == 0 && sect.getPatt()[2] == 1)) {
                         super.getPlayer().subtractHealth();
                         NO.play(0.5f);
+                    }
+                    else {
+                        hihat.play();
                     }
                 }
                 dpres = true;
