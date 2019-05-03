@@ -28,6 +28,7 @@ public class WriteTrack extends Track {
     private Sound snare = Gdx.audio.newSound(Gdx.files.internal("DrumKit/snare.wav"));
     private Sound hihat = Gdx.audio.newSound(Gdx.files.internal("DrumKit/hihat.wav"));
     private Sound tick = Gdx.audio.newSound(Gdx.files.internal("DrumKit/tick.wav"));
+    private Sound NO = Gdx.audio.newSound(Gdx.files.internal("DrumKit/NO.wav"));
 
     private Texture track = new Texture("track.png");
     public WriteTrack(int x, int BPM, LinkedList<TrackSection> t, int c){
@@ -84,8 +85,10 @@ public class WriteTrack extends Track {
 
 
             //if nothing was pressed and sect is empty lose health
-            if (((apres == true|| spres == true || dpres == true) != true) && super.getSects().get(4).isEmpty() == false) {
+            if (((apres == true|| spres == true || dpres == true) != true) && super.getSects().get(4).isEmpty() == false &&
+                    (super.getSects().get(4).getTrack() == super.getControlScheme() || super.getSects().get(4).getTrack() == 3)) {
                 super.getPlayer().subtractHealth();
+                NO.play(0.5f);
             }
 
             loopSection();
@@ -149,6 +152,10 @@ public class WriteTrack extends Track {
                     //if you didn't hit the right beat
                     if (!(sect.getPatt()[0] == 1 && sect.getPatt()[1] == 0 && sect.getPatt()[2] == 0)) {
                         super.getPlayer().subtractHealth();
+                        NO.play(0.5f);
+                    }
+                    else {
+                        kick.play();
                     }
                 }
                 apres = true;
@@ -173,6 +180,7 @@ public class WriteTrack extends Track {
                     //if you didn't hit the right beat
                     if (!(sect.getPatt()[0] == 0 && sect.getPatt()[1] == 1 && sect.getPatt()[2] == 0)) {
                         super.getPlayer().subtractHealth();
+                        NO.play(0.5f);
                     }
                 }
                 spres = true;
@@ -197,6 +205,7 @@ public class WriteTrack extends Track {
                     //if you didn't hit the right beat
                     if (!(sect.getPatt()[0] == 01 && sect.getPatt()[1] == 0 && sect.getPatt()[2] == 1)) {
                         super.getPlayer().subtractHealth();
+                        NO.play(0.5f);
                     }
                 }
                 dpres = true;
@@ -224,6 +233,7 @@ public class WriteTrack extends Track {
                     //if you didn't hit the right beat
                     if (!(sect.getPatt()[0] == 1 && sect.getPatt()[1] == 0 && sect.getPatt()[2] == 0)) {
                         super.getPlayer().subtractHealth();
+                        NO.play(0.5f);
                     }
                 }
                 apres = true;
@@ -248,6 +258,7 @@ public class WriteTrack extends Track {
                     //if you didn't hit the right beat
                     if (!(sect.getPatt()[0] == 0 && sect.getPatt()[1] == 1 && sect.getPatt()[2] == 0)) {
                         super.getPlayer().subtractHealth();
+                        NO.play(0.5f);
                     }
                 }
                 spres = true;
@@ -273,6 +284,7 @@ public class WriteTrack extends Track {
                     //if you didn't hit the right beat
                     if (!(sect.getPatt()[0] == 0 && sect.getPatt()[1] == 0 && sect.getPatt()[2] == 1)) {
                         super.getPlayer().subtractHealth();
+                        NO.play(0.5f);
                     }
                 }
                 dpres = true;
